@@ -10,8 +10,9 @@ export class magicCard {
     private typo_: tipe, 
     private rare_: rare, 
     private rules_: string, 
-    private strRes_?: number, 
     private loyalty_: number, 
-    private value_: number) { }
+    private value_: number
+    , 
+    private strRes_?: number) { }
 
   }
