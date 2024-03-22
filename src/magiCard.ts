@@ -11,10 +11,9 @@ export class magicCard {
     private rare_: rare, 
     private rules_: string, 
     private loyalty_: number, 
-    private value_: number
-    , 
+    private value_: number, 
     private strRes_?: number) {}
-    //getters
+    
     getID(): number {
       return this.iD;
     }

@@ -1,1 +1,1 @@
-{"iD":1,"name_":"Nombre de la carta","manaCost_":3,"color_":"blue","typo_":"sorcery","rare_":"common","rules_":"Descripción de las reglas","loyalty_":4,"value_":10}
+{"iD":1,"name_":"Lightning Bolt","manaCost_":1,"color_":"red","typo_":"instant","rare_":"common","rules_":"Deal 3 damage to any target","loyalty_":0,"value_":2}
