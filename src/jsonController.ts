@@ -1,8 +1,8 @@
 import * as fs from 'fs';
-import { magicCard } from './magiCard';
-import * as chalk from 'chalk';
+import { magicCard } from './magiCard.js';
+import chalk from 'chalk';
 
-const directorioUsuario = `./usuarios/${process.env.USER}`;
+const directorioUsuario = `./src/usuarios/${process.env.USER}`;
 
 export class jsonCards {
 
@@ -78,6 +78,20 @@ export class jsonCards {
     cards.forEach(card => {
       cardsArray.push(JSON.parse(fs.readFileSync(`${directorioUsuario}/${card}`, 'utf-8')));
     });
-    return cardsArray;
+    cardsArray.forEach(card => {
+      console.log(chalk.blue('-----------------------------------------------------------------------------------------------------------------'));
+      console.log(chalk.blue(`ID: ${card.iD}`));
+      console.log(chalk.blue(`Name: ${card.name_}`));
+      console.log(chalk.blue(`Mana Cost: ${card.manaCost_}`));
+      console.log(chalk.blue(`Color: ${card.color_}`));
+      console.log(chalk.blue(`Type: ${card.typo_}`));
+      console.log(chalk.blue(`Rare: ${card.rare_}`));
+      console.log(chalk.blue(`Rules: ${card.rules_}`));
+      console.log(chalk.blue(`Loyalty: ${card.loyalty_}`));
+      console.log(chalk.blue(`Value: ${card.value_}`));
+      if (card.strRes_) {
+        console.log(chalk.blue(`Strength/Resistance: ${card.strRes_}`));
+      }
+    });
   }
 }

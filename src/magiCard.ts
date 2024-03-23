@@ -3,16 +3,16 @@ export enum rare { common, uncommon, rare, mythicRare };
 export enum tipe { creature, enchantment, artifact, instant, sorcery, planeswalker, land };
 
 export class magicCard {
-  constructor(private iD: number, 
-    private name_: string, 
-    private manaCost_: number, 
-    private color_: color, 
-    private typo_: tipe, 
-    private rare_: rare, 
-    private rules_: string, 
-    private loyalty_: number, 
-    private value_: number, 
-    private strRes_?: number) {}
+  constructor(public iD: number, 
+    public name_: string, 
+    public manaCost_: number, 
+    public color_: color, 
+    public typo_: tipe, 
+    public rare_: rare, 
+    public rules_: string, 
+    public loyalty_: number, 
+    public value_: number, 
+    public strRes_?: number) {}
     
     getID(): number {
       return this.iD;
@@ -26,7 +26,7 @@ export class magicCard {
     getColor(): color {
       return this.color_;
     }
-    getTipe(): tipe {
+    getType(): tipe {
       return this.typo_;
     }
     getRare(): rare {

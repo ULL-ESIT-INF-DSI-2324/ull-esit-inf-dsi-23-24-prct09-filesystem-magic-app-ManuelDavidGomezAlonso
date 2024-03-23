@@ -1,8 +1,8 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { magicCard , color, tipe, rare } from './magiCard';
-import { jsonCards } from './jsonController';
-import * as chalk from 'chalk';
+import { magicCard , color, tipe, rare } from './magiCard.js';
+import { jsonCards } from './jsonController.js';
+import chalk from 'chalk';
 
 yargs(hideBin(process.argv))
 
@@ -169,6 +169,103 @@ yargs(hideBin(process.argv))
       
       const json = new jsonCards();
       json.modify(argv.id as number, argv.valueToChange as string, argv.newValue as string | number);
+    })
+    .command('update', 'Update a card from collection', {
+      id: {
+        description: 'Card ID',
+        type: 'number',
+        demandOption: true
+      },
+      name: {
+        description: 'card name',
+        type: 'string',
+        demandOption: true
+      },
+      manaCost: {
+        description: 'Mana cost',
+        type: 'number',
+        demandOption: true
+      },
+      color: {
+        description: 'Color',
+        choices: Object.values(color),
+        demandOption: true
+      },
+      type: {
+        description: 'Type',
+        choices: Object.values(tipe),
+        demandOption: true
+      },
+      rare: {
+        description: 'Rare',
+        choices: Object.values(rare),
+        demandOption: true
+      },
+      rules: {
+        description: 'Rules',
+        type: 'string',
+        demandOption: true
+      },
+      loyalty: {
+        description: 'Loyalty',
+        type: 'number',
+        demandOption: true
+      },
+      value: {
+        description: 'Value',
+        type: 'number',
+        demandOption: true
+      },
+      strRes: {
+        description: 'Strength/Resistance',
+        type: 'number'
+      }
+    }, (argv) => {
+
+      if (isNaN(argv.id)) {
+        throw chalk.red(new Error('ID must be a number'));
+      }
+
+      if (typeof argv.name !== 'string') {
+        throw chalk.red(new Error('Name must be a string'));
+      }
+
+      if (isNaN(argv.manaCost)) {
+        throw chalk.red(new Error('Mana Cost must be a number'));
+      }
+
+      if (!Object.values(color).includes(argv.color)) {
+        throw chalk.red(new Error('Color must be a valid color'));
+      }
+
+      if (!Object.values(tipe).includes(argv.type)) {
+        throw chalk.red(new Error('Type must be a valid type'));
+      }
+
+      if (!Object.values(rare).includes(argv.rare)) {
+        throw chalk.red(new Error('Rare must be a valid rare'));
+      }
+
+      if (typeof argv.rules !== 'string') {
+        throw chalk.red(new Error('Rules must be a string'));
+      }
+
+      if (isNaN(argv.loyalty)) {
+        throw chalk.red(new Error('Loyalty must be a number'));
+      }
+
+      if (isNaN(argv.value)) {
+        throw chalk.red(new Error('Value must be a number'));
+      }
+
+      if (argv.strRes && isNaN(argv.strRes)) {
+        throw chalk.red(new Error('Strength/Resistance must be a number'));
+      }
+    })
+
+    .command('showAll', 'Show all cards from collection', () => {
+      const json = new jsonCards();
+      console.log(json.showAllCards());
     })
     
  .help()
