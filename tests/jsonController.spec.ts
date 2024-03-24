@@ -13,7 +13,7 @@ describe('JsonController', () => {
   it('should create an instance', () => {
     expect(new jsonCards()).to.be.an.instanceOf(jsonCards);
   });
-  // Creando usuarios en src si fuera necesario
+
   it('should create a directory usuarios', () => {
     if (fs.existsSync('./src/usuarios')) {
       fs.rmdirSync('./src/usuarios', { recursive: true });  
@@ -83,11 +83,12 @@ describe('JsonController', () => {
     const files = fs.readdirSync(directorioUsuario);
     expect(files.length).to.be.equal(2);
   });
-  // borrando carta inexistente
+
   it('should delete a card', () => {
     const controller = new jsonCards();
     expect(() => controller.delete(1000)).to.throw(chalk.red(new Error(`Card not found in ${process.env.USER}`)));
   });
+
   it('should delete a card', () => {
     const controller = new jsonCards();
     const cart = new magicCard(0,'Cazador', 16, color.multicolor, tipe.creature, rare.mythicRare, 'No puede atacar cuerpo a cuerpo', 150, 100, 1000);
@@ -124,7 +125,6 @@ describe('JsonController', () => {
       files = undefined;
     }
     expect(files).to.be.equal(undefined);
-
   });
 
   it('should modify a card', () => {
