@@ -8,9 +8,9 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2324/ull-esit-inf-dsi-23-24-prct09-filesystem-magic-app-ManuelDavidGomezAlonso/badge.svg?branch=main)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2324/ull-esit-inf-dsi-23-24-prct09-filesystem-magic-app-ManuelDavidGomezAlonso?branch=main)
 
-[![Tests](https://github.com/ULL-ESIT-INF-DSI-2324/ull-esit-inf-dsi-23-24-prct07-dsikea-datamodel-groupn/actions/workflows/node.js.yml/badge.svg)](https://github.com/ULL-ESIT-INF-DSI-2324/ull-esit-inf-dsi-23-24-prct07-dsikea-datamodel-groupn/actions/workflows/node.js.yml)
-
 [Enunciado de la práctica 9](https://ull-esit-inf-dsi-2324.github.io/prct09-fiilesystem-magic-app/)
+
+[SonarCloud](https://sonarcloud.io/project/overview?id=ULL-ESIT-INF-DSI-2324_ull-esit-inf-dsi-23-24-prct09-filesystem-magic-app-ManuelDavidGomezAlonso)
 
 ## Índice
 1. [Resumen](#resumen)
@@ -230,7 +230,7 @@ _El uso de **fs** y **chalk** lo explicaremos en apartados posteriores._
 
 > **[Volver al índice](#índice)**
 
-- ### Uso de chalk.
+- ### Uso de chalk
 
 Usamos chalk para dar formato a la salida de errores y por consola en nuestro caso, el uso es simple.
 
@@ -242,7 +242,7 @@ console.log(chalk.blue(`ID: ${card.id_}`));
 
 > **[Volver al índice](#índice)**
 
-- ### Uso de fs.
+- ### Uso de fs
 
 Buscabamos tener una "aplicación" persistente, lo hemos conseguido mediante el uso de esta API.
 
