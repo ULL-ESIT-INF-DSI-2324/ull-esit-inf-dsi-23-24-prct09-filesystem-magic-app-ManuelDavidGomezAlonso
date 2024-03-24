@@ -1,4 +1,3 @@
-
 /**
  * @fileoverview Este archivo contiene la declaración de los comandos, y el uso de las funciones para gestionar las cartas mediante ficheros JSON.
  */
@@ -7,6 +6,11 @@ import { magicCard, color, tipe, rare } from "./magiCard.js";
 import { jsonCards } from "./jsonController.js";
 import chalk from "chalk";
 import yargs, { Options } from "yargs";
+
+/**
+ * @brief Argumentos comunes para los comandos.
+ 
+ */
 const commonArgs: { [key: string]: Options } = {
   id: {
     description: "Card ID",
@@ -57,7 +61,12 @@ const commonArgs: { [key: string]: Options } = {
     type: "number",
   },
 };
-function comprube(argv: magicCard){
+
+/**
+ * @brief Comprueba que los argumentos de la carta sean correctos.
+ * @param argv Argumentos de la carta.
+ */
+function comprube(argv: magicCard) {
   if (isNaN(argv.id_)) {
     throw chalk.red(new Error("ID must be a number"));
   }
@@ -96,7 +105,6 @@ function comprube(argv: magicCard){
     }
   }
 
-
   if (isNaN(argv.value_)) {
     throw chalk.red(new Error("Value must be a number"));
   }
@@ -111,27 +119,30 @@ function comprube(argv: magicCard){
     }
   } else {
     if (argv.strRes_ !== undefined) {
-      throw chalk.red(new Error("Strength/Resistance is only for Creature type"));
+      throw chalk.red(
+        new Error("Strength/Resistance is only for Creature type"),
+      );
     }
   }
 }
+
+/**
+ * @brief Comando para añadir una carta a la colección, utiliza la función add de la clase jsonCards.
+ * Para ello se le pasan todos los argumentos necesarios para crear una carta que posteriormente serán comprobados y se lanzarán errores si no son correctos.
+ * @param id ID de la carta
+ * @param name Nombre de la carta
+ * @param manaCost Coste de maná
+ * @param color Color de la carta
+ * @param type Tipo de la carta
+ * @param rare Rareza de la carta
+ * @param rules Reglas de la carta
+ * @param loyalty Lealtad de la carta
+ * @param value Valor de la carta
+ * @param strRes Fuerza/Resistencia de la carta, debe ser del tipo creature.
+ * Todos los parametros se añadiran por comandos mediante --.
+ * __Ejemplo de uso:__ node dist/app.js add --id 1 --name "Carta1" --manaCost 1 --color white --type creature --rare common --rules "Reglas" --loyalty 1 --value 1 --strRes 1.
+ */
 yargs(hideBin(process.argv))
-  /**
-   * @brief Comando para añadir una carta a la colección, utiliza la función add de la clase jsonCards.
-   * Para ello se le pasan todos los argumentos necesarios para crear una carta que posteriormente serán comprobados y se lanzarán errores si no son correctos.
-   * @param id ID de la carta
-   * @param name Nombre de la carta
-   * @param manaCost Coste de maná
-   * @param color Color de la carta
-   * @param type Tipo de la carta
-   * @param rare Rareza de la carta
-   * @param rules Reglas de la carta
-   * @param loyalty Lealtad de la carta
-   * @param value Valor de la carta
-   * @param strRes Fuerza/Resistencia de la carta, debe ser del tipo creature.
-   * Todos los parametros se añadiran por comandos mediante --.
-   * __Ejemplo de uso:__ node dist/app.js add --id 1 --name "Carta1" --manaCost 1 --color white --type creature --rare common --rules "Reglas" --loyalty 1 --value 1 --strRes 1.
-   */
   .command(
     "add",
     "Adds a card to the collection",
@@ -146,10 +157,10 @@ yargs(hideBin(process.argv))
         argv.color as color,
         argv.type as tipe,
         argv.rare as rare,
-        argv.rules as string, 
-        argv.value as number, 
-        argv.strRes as number | undefined, 
-        argv.loyalty as number | undefined, 
+        argv.rules as string,
+        argv.value as number,
+        argv.strRes as number | undefined,
+        argv.loyalty as number | undefined,
       );
       comprube(card);
       const json = new jsonCards();
@@ -286,11 +297,11 @@ yargs(hideBin(process.argv))
         argv.color as color,
         argv.type as tipe,
         argv.rare as rare,
-        argv.rules as string, 
-        argv.value as number, 
-        argv.strRes as number | undefined, 
-        argv.loyalty as number | undefined, 
-      )
+        argv.rules as string,
+        argv.value as number,
+        argv.strRes as number | undefined,
+        argv.loyalty as number | undefined,
+      );
       comprube(card);
       json.update(card);
     },

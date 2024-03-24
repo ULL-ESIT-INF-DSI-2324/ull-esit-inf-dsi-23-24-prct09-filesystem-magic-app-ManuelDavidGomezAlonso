@@ -17,8 +17,8 @@ export class jsonCards {
    * Se verifica si existe el directorio del usuario, si no existe se crea.
    */
   constructor() {
-    if(!fs.existsSync('./src/usuarios')){
-      fs.mkdirSync('./src/usuarios');
+    if (!fs.existsSync("./src/usuarios")) {
+      fs.mkdirSync("./src/usuarios");
     }
     if (!fs.existsSync(directorioUsuario)) {
       fs.mkdirSync(directorioUsuario);
@@ -34,8 +34,8 @@ export class jsonCards {
       throw chalk.red(new Error(`Card already exists in ${process.env.USER}`));
     } else {
       fs.writeFileSync(
-      `${directorioUsuario}/${card.id_}.json`,
-      JSON.stringify(card),
+        `${directorioUsuario}/${card.id_}.json`,
+        JSON.stringify(card),
       );
       console.log(chalk.green("Card added"));
     }
@@ -75,7 +75,7 @@ export class jsonCards {
       console.log(chalk.blue(`Value: ${card.value_}`));
       if (card.strRes_) {
         console.log(chalk.blue(`Strength/Resistance: ${card.strRes_}`));
-      } 
+      }
     } else {
       throw chalk.red(new Error(`Card not found in ${process.env.USER}`));
     }
