@@ -8,6 +8,64 @@ import { jsonCards } from "./jsonController.js";
 import chalk from "chalk";
 import yargs from "yargs";
 
+function comprube(argv: magicCard){
+  if (isNaN(argv.id_)) {
+    throw chalk.red(new Error("ID must be a number"));
+  }
+
+  if (typeof argv.name_ !== "string") {
+    throw chalk.red(new Error("Name must be a string"));
+  }
+
+  if (isNaN(argv.manaCost_)) {
+    throw chalk.red(new Error("Mana Cost must be a number"));
+  }
+
+  if (!Object.values(color).includes(argv.color_)) {
+    throw chalk.red(new Error("Color must be a valid color"));
+  }
+
+  if (!Object.values(tipe).includes(argv.typo_)) {
+    throw chalk.red(new Error("Type must be a valid type"));
+  }
+
+  if (!Object.values(rare).includes(argv.rare_)) {
+    throw chalk.red(new Error("Rare must be a valid rare"));
+  }
+
+  if (typeof argv.rules_ !== "string") {
+    throw chalk.red(new Error("Rules must be a string"));
+  }
+
+  if (argv.typo_ === Object.values(tipe)[5]) {
+    if (!argv.loyalty_) {
+      throw chalk.red(new Error("planeswalker type must have Loyalty"));
+    }
+  } else {
+    if (argv.loyalty_ !== undefined) {
+      throw chalk.red(new Error("Loyalty is only for planeswalker type"));
+    }
+  }
+
+
+  if (isNaN(argv.value_)) {
+    throw chalk.red(new Error("Value must be a number"));
+  }
+
+  if (argv.strRes_ && isNaN(argv.strRes_)) {
+    throw chalk.red(new Error("Strength/Resistance must be a number"));
+  }
+
+  if (argv.typo_ === Object.values(tipe)[0]) {
+    if (!argv.strRes_) {
+      throw chalk.red(new Error("Creature type must have Strength/Resistance"));
+    }
+  } else {
+    if (argv.strRes_ !== undefined) {
+      throw chalk.red(new Error("Strength/Resistance is only for Creature type"));
+    }
+  }
+}
 yargs(hideBin(process.argv))
   /**
    * @brief Comando para añadir una carta a la colección, utiliza la función add de la clase jsonCards.
@@ -80,27 +138,6 @@ yargs(hideBin(process.argv))
       },
     },
     (argv) => {
-
-      if (argv.type === Object.values(tipe)[5]) {
-        if (!argv.loyalty) {
-          throw chalk.red(new Error("planeswalker type must have Loyalty"));
-        }
-      } else {
-        if (argv.loyalty !== undefined) {
-          throw chalk.red(new Error("Loyalty is only for planeswalker type"));
-        }
-      }
-
-      if (argv.type === Object.values(tipe)[0]) {
-        if (!argv.strRes) {
-          throw chalk.red(new Error("Creature type must have Strength/Resistance"));
-        }
-      } else {
-        if (argv.strRes !== undefined) {
-          throw chalk.red(new Error("Strength/Resistance is only for Creature type"));
-        }
-      }
-
       const card = new magicCard(
         argv.id,
         argv.name,
@@ -113,6 +150,7 @@ yargs(hideBin(process.argv))
         argv.strRes,
         argv.loyalty,
       );
+      comprube(card);
       const json = new jsonCards();
       json.add(card);
     },
@@ -286,42 +324,21 @@ yargs(hideBin(process.argv))
       },
     },
     (argv) => {
-
-      if (argv.type === Object.values(tipe)[5]) {
-        if (!argv.loyalty) {
-          throw chalk.red(new Error("planeswalker type must have Loyalty"));
-        }
-      } else {
-        if (argv.loyalty !== undefined) {
-          throw chalk.red(new Error("Loyalty is only for planeswalker type"));
-        }
-      }
-
-      if (argv.type === Object.values(tipe)[0]) {
-        if (!argv.strRes) {
-          throw chalk.red(new Error("Creature type must have Strength/Resistance"));
-        }
-      } else {
-        if (argv.strRes !== undefined) {
-          throw chalk.red(new Error("Strength/Resistance is only for Creature type"));
-        }
-      }
-
       const json = new jsonCards();
-      json.update(
-        new magicCard(
-          argv.id,
-          argv.name,
-          argv.manaCost,
-          argv.color as color,
-          argv.type as tipe,
-          argv.rare as rare,
-          argv.rules,
-          argv.value,
-          argv.strRes,
-          argv.loyalty,
-        ),
-      );
+      const card = new magicCard(
+        argv.id,
+        argv.name,
+        argv.manaCost,
+        argv.color as color,
+        argv.type as tipe,
+        argv.rare as rare,
+        argv.rules,
+        argv.value,
+        argv.strRes,
+        argv.loyalty,
+      )
+      comprube(card);
+      json.update(card);
     },
   )
 
