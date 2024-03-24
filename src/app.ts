@@ -6,8 +6,57 @@ import { hideBin } from "yargs/helpers";
 import { magicCard, color, tipe, rare } from "./magiCard.js";
 import { jsonCards } from "./jsonController.js";
 import chalk from "chalk";
-import yargs from "yargs";
-
+import yargs, { Options } from "yargs";
+const commonArgs: { [key: string]: Options } = {
+  id: {
+    description: "Card ID",
+    type: "number",
+    demandOption: true,
+  },
+  name: {
+    description: "card name",
+    type: "string",
+    demandOption: true,
+  },
+  manaCost: {
+    description: "Mana cost",
+    type: "number",
+    demandOption: true,
+  },
+  color: {
+    description: "Color",
+    choices: Object.values(color),
+    demandOption: true,
+  },
+  type: {
+    description: "Type",
+    choices: Object.values(tipe),
+    demandOption: true,
+  },
+  rare: {
+    description: "Rare",
+    choices: Object.values(rare),
+    demandOption: true,
+  },
+  rules: {
+    description: "Rules",
+    type: "string",
+    demandOption: true,
+  },
+  loyalty: {
+    description: "Loyalty",
+    type: "number",
+  },
+  value: {
+    description: "Value",
+    type: "number",
+    demandOption: true,
+  },
+  strRes: {
+    description: "Strength/Resistance",
+    type: "number",
+  },
+};
 function comprube(argv: magicCard){
   if (isNaN(argv.id_)) {
     throw chalk.red(new Error("ID must be a number"));
@@ -87,68 +136,20 @@ yargs(hideBin(process.argv))
     "add",
     "Adds a card to the collection",
     {
-      id: {
-        description: "Card ID",
-        type: "number",
-        demandOption: true,
-      },
-      name: {
-        description: "card name",
-        type: "string",
-        demandOption: true,
-      },
-      manaCost: {
-        description: "Mana cost",
-        type: "number",
-        demandOption: true,
-      },
-      color: {
-        description: "Color",
-        choices: Object.values(color),
-        demandOption: true,
-      },
-      type: {
-        description: "Type",
-        choices: Object.values(tipe),
-        demandOption: true,
-
-      },
-      rare: {
-        description: "Rare",
-        choices: Object.values(rare),
-        demandOption: true,
-      },
-      rules: {
-        description: "Rules",
-        type: "string",
-        demandOption: true,
-      },
-      loyalty: {
-        description: "Loyalty",
-        type: "number",
-      },
-      value: {
-        description: "Value",
-        type: "number",
-        demandOption: true,
-      },
-      strRes: {
-        description: "Strength/Resistance",
-        type: "number",
-      },
+      ...commonArgs,
     },
     (argv) => {
       const card = new magicCard(
-        argv.id,
-        argv.name,
-        argv.manaCost,
+        argv.id as number,
+        argv.name as string,
+        argv.manaCost as number,
         argv.color as color,
         argv.type as tipe,
         argv.rare as rare,
-        argv.rules,
-        argv.value,
-        argv.strRes,
-        argv.loyalty,
+        argv.rules as string, 
+        argv.value as number, 
+        argv.strRes as number | undefined, 
+        argv.loyalty as number | undefined, 
       );
       comprube(card);
       const json = new jsonCards();
@@ -274,68 +275,21 @@ yargs(hideBin(process.argv))
     "update",
     "Update a card from collection",
     {
-      id: {
-        description: "Card ID",
-        type: "number",
-        demandOption: true,
-      },
-      name: {
-        description: "card name",
-        type: "string",
-        demandOption: true,
-      },
-      manaCost: {
-        description: "Mana cost",
-        type: "number",
-        demandOption: true,
-      },
-      color: {
-        description: "Color",
-        choices: Object.values(color),
-        demandOption: true,
-      },
-      type: {
-        description: "Type",
-        choices: Object.values(tipe),
-        demandOption: true,
-      },
-      rare: {
-        description: "Rare",
-        choices: Object.values(rare),
-        demandOption: true,
-      },
-      rules: {
-        description: "Rules",
-        type: "string",
-        demandOption: true,
-      },
-      loyalty: {
-        description: "Loyalty",
-        type: "number",
-      },
-      value: {
-        description: "Value",
-        type: "number",
-        demandOption: true,
-      },
-      strRes: {
-        description: "Strength/Resistance",
-        type: "number",
-      },
+      ...commonArgs,
     },
     (argv) => {
       const json = new jsonCards();
       const card = new magicCard(
-        argv.id,
-        argv.name,
-        argv.manaCost,
+        argv.id as number,
+        argv.name as string,
+        argv.manaCost as number,
         argv.color as color,
         argv.type as tipe,
         argv.rare as rare,
-        argv.rules,
-        argv.value,
-        argv.strRes,
-        argv.loyalty,
+        argv.rules as string, 
+        argv.value as number, 
+        argv.strRes as number | undefined, 
+        argv.loyalty as number | undefined, 
       )
       comprube(card);
       json.update(card);
