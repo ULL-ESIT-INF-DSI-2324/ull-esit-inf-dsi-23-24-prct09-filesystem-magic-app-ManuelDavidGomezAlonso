@@ -53,6 +53,7 @@ export class jsonCards {
    * @param showIDCard ID de la carta a mostrar.
    */
   showCard(showIDCard: number) {
+    
     const filePath = `${directorioUsuario}/${showIDCard}.json`;
     if (fs.existsSync(filePath)) {
       console.log(chalk.green("Showing card"));
