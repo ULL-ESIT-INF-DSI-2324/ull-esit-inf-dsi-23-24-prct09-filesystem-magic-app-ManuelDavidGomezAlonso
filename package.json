@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/yargsComands.js\"",
-    "doc": "typedoc",
+    "doc": "typedoc; touch ./docs/.nojekyll",
     "test": "mocha",
     "coverage": "nyc npm test && nyc report --reporter=lcov"
   },
