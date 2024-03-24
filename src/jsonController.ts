@@ -53,7 +53,6 @@ export class jsonCards {
    * @param showIDCard ID de la carta a mostrar.
    */
   showCard(showIDCard: number) {
-    
     const filePath = `${directorioUsuario}/${showIDCard}.json`;
     if (fs.existsSync(filePath)) {
       console.log(chalk.green("Showing card"));
@@ -87,9 +86,9 @@ export class jsonCards {
         JSON.stringify(card),
       );
       console.log(chalk.green("Card updated"));
-      0;
+    } else {
+      throw chalk.red(new Error(`Card not found in ${process.env.USER}`));
     }
-    throw chalk.red(new Error(`Card not found in ${process.env.USER}`));
   }
 
   /**
@@ -112,7 +111,7 @@ export class jsonCards {
           `${directorioUsuario}/${cardID}.json`,
           JSON.stringify(cardObj),
         );
-        console.log(chalk.green("Card modified"))
+        console.log(chalk.green("Card modified"));
       } else {
         throw chalk.red(new Error("Property not found in object magicCard"));
       }
