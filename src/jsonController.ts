@@ -32,12 +32,13 @@ export class jsonCards {
   add(card: magicCard) {
     if (fs.existsSync(`${directorioUsuario}/${card.id_}.json`)) {
       throw chalk.red(new Error(`Card already exists in ${process.env.USER}`));
-    }
-    fs.writeFileSync(
+    } else {
+      fs.writeFileSync(
       `${directorioUsuario}/${card.id_}.json`,
       JSON.stringify(card),
-    );
-    console.log(chalk.green("Card added"));
+      );
+      console.log(chalk.green("Card added"));
+    }
   }
 
   /**
@@ -48,6 +49,8 @@ export class jsonCards {
     if (fs.existsSync(`${directorioUsuario}/${cardID}.json`)) {
       fs.unlinkSync(`${directorioUsuario}/${cardID}.json`);
       console.log(chalk.green("Card deleted"));
+    } else {
+      throw chalk.red(new Error(`Card not found in ${process.env.USER}`));
     }
   }
 
@@ -72,9 +75,9 @@ export class jsonCards {
       console.log(chalk.blue(`Value: ${card.value_}`));
       if (card.strRes_) {
         console.log(chalk.blue(`Strength/Resistance: ${card.strRes_}`));
-      }
+      } 
     } else {
-      throw new Error(chalk.red(`Card not found with ID ${showIDCard}`));
+      throw chalk.red(new Error(`Card not found in ${process.env.USER}`));
     }
   }
 
