@@ -12,7 +12,7 @@
 // }
 
 // /**
-//  * @brief Clase abstracta para la obtencion de la información del problema. 
+//  * @brief Clase abstracta para la obtencion de la información del problema.
 //  */
 // export abstract class infoTaker {
 //   protected info: string[]; // Array to store information
@@ -29,7 +29,7 @@
 //    * @param textInfo Información que contiene el fichero.
 //    */
 //   protected abstract infoTake(textFile: string): Map<string, number>;
-    
+
 //   protected AftherInfoTake(){}
 
 //   showInfo() {
@@ -44,9 +44,9 @@
 
 //   /**
 //    * @brief Función abstracta con los pasos que debe hacer CSS.
-//    * @param textFile 
-//    * @param textInfo 
-//    * @returns 
+//    * @param textFile
+//    * @param textInfo
+//    * @returns
 //    */
 //   infoTake(textFile: string): Map<string, number>{
 //     // const text = new FileSync(textFile);
@@ -65,9 +65,9 @@
 
 //   /**
 //    * @brief Funcion abstracta con los pasos que se debe hacer para un JSON.
-//    * @param textFile 
-//    * @param textInfo 
-//    */    
+//    * @param textFile
+//    * @param textInfo
+//    */
 //   infoTake(textFile: string): Map<string, number>{
 //     // const text = new FileSync(textFile);
 //     // const peso = text.get("elemetos").get("peso").value();
