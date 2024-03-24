@@ -50,8 +50,8 @@ export class magicCard {
     public typo_: tipe,
     public rare_: rare,
     public rules_: string,
-    public loyalty_: number,
     public value_: number,
     public strRes_?: number,
+    public loyalty_?: number,
   ) {}
 }

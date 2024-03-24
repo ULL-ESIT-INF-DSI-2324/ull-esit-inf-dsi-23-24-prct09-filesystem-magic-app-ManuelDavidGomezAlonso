@@ -107,10 +107,10 @@ yargs(hideBin(process.argv))
         throw chalk.red(new Error("Rules must be a string"));
       }
 
-      if (isNaN(argv.loyalty)) {
+      if (isNaN(argv.loyalty) && argv.type !== tipe.planeswalker) {
         throw chalk.red(new Error("Loyalty must be a number"));
       }
-
+      
       if (isNaN(argv.value)) {
         throw chalk.red(new Error("Value must be a number"));
       }
