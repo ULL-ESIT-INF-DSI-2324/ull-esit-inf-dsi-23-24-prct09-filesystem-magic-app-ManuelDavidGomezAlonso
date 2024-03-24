@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { magicCard, color, tipe, rare } from '../src/magiCard';
+import { magicCard, color, tipe, rare } from '../src/magiCard.js';
 
 describe('MagiCards', () => {
   //creando una instancia del objeto correctametne

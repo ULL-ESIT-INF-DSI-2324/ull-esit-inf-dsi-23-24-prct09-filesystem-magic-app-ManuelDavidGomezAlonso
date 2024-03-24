@@ -1,7 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { jsonCards } from '../src/jsonController';
-import { magicCard, color, tipe, rare} from '../src/magiCard';
+import { jsonCards } from '../src/jsonController.js';
+import { magicCard, color, tipe, rare} from '../src/magiCard.js';
 import fs from 'fs';
 
 
