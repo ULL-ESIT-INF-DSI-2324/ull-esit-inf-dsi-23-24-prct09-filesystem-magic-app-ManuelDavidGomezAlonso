@@ -52,6 +52,7 @@ yargs(hideBin(process.argv))
         description: "Type",
         choices: Object.values(tipe),
         demandOption: true,
+
       },
       rare: {
         description: "Rare",
@@ -66,7 +67,6 @@ yargs(hideBin(process.argv))
       loyalty: {
         description: "Loyalty",
         type: "number",
-        demandOption: true,
       },
       value: {
         description: "Value",
@@ -107,10 +107,17 @@ yargs(hideBin(process.argv))
         throw chalk.red(new Error("Rules must be a string"));
       }
 
-      if (isNaN(argv.loyalty) && argv.type !== tipe.planeswalker) {
-        throw chalk.red(new Error("Loyalty must be a number"));
+      if (argv.type === Object.values(tipe)[5]) {
+        if (!argv.loyalty) {
+          throw chalk.red(new Error("planeswalker type must have Loyalty"));
+        }
+      } else {
+        if (argv.loyalty !== undefined) {
+          throw chalk.red(new Error("Loyalty is only for planeswalker type"));
+        }
       }
-      
+
+
       if (isNaN(argv.value)) {
         throw chalk.red(new Error("Value must be a number"));
       }
@@ -119,16 +126,14 @@ yargs(hideBin(process.argv))
         throw chalk.red(new Error("Strength/Resistance must be a number"));
       }
 
-      if (argv.strRes && argv.type !== tipe.creature) {
-        throw chalk.red(
-          new Error("Strength/Resistance is only for Creature type"),
-        );
-      }
-
-      if (argv.type === tipe.creature && !argv.strRes) {
-        throw chalk.red(
-          new Error("Creature type must have Strength/Resistance"),
-        );
+      if (argv.type === Object.values(tipe)[0]) {
+        if (!argv.strRes) {
+          throw chalk.red(new Error("Creature type must have Strength/Resistance"));
+        }
+      } else {
+        if (argv.strRes !== undefined) {
+          throw chalk.red(new Error("Strength/Resistance is only for Creature type"));
+        }
       }
 
       const card = new magicCard(
@@ -139,9 +144,9 @@ yargs(hideBin(process.argv))
         argv.type as tipe,
         argv.rare as rare,
         argv.rules,
-        argv.loyalty,
         argv.value,
         argv.strRes,
+        argv.loyalty,
       );
       const json = new jsonCards();
       json.add(card);
@@ -304,7 +309,6 @@ yargs(hideBin(process.argv))
       loyalty: {
         description: "Loyalty",
         type: "number",
-        demandOption: true,
       },
       value: {
         description: "Value",
@@ -345,8 +349,14 @@ yargs(hideBin(process.argv))
         throw chalk.red(new Error("Rules must be a string"));
       }
 
-      if (isNaN(argv.loyalty)) {
-        throw chalk.red(new Error("Loyalty must be a number"));
+      if (argv.type === Object.values(tipe)[5]) {
+        if (!argv.loyalty) {
+          throw chalk.red(new Error("planeswalker type must have Loyalty"));
+        }
+      } else {
+        if (argv.loyalty !== undefined) {
+          throw chalk.red(new Error("Loyalty is only for planeswalker type"));
+        }
       }
 
       if (isNaN(argv.value)) {
@@ -357,16 +367,14 @@ yargs(hideBin(process.argv))
         throw chalk.red(new Error("Strength/Resistance must be a number"));
       }
 
-      if (argv.strRes && argv.type !== tipe.creature) {
-        throw chalk.red(
-          new Error("Strength/Resistance is only for Creature type"),
-        );
-      }
-
-      if (argv.type === tipe.creature && !argv.strRes) {
-        throw chalk.red(
-          new Error("Creature type must have Strength/Resistance"),
-        );
+      if (argv.type === Object.values(tipe)[0]) {
+        if (!argv.strRes) {
+          throw chalk.red(new Error("Creature type must have Strength/Resistance"));
+        }
+      } else {
+        if (argv.strRes !== undefined) {
+          throw chalk.red(new Error("Strength/Resistance is only for Creature type"));
+        }
       }
 
       const json = new jsonCards();
@@ -379,9 +387,9 @@ yargs(hideBin(process.argv))
           argv.type as tipe,
           argv.rare as rare,
           argv.rules,
-          argv.loyalty,
           argv.value,
           argv.strRes,
+          argv.loyalty,
         ),
       );
     },

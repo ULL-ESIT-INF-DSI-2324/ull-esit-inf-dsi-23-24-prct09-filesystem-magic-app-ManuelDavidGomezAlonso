@@ -17,6 +17,9 @@ export class jsonCards {
    * Se verifica si existe el directorio del usuario, si no existe se crea.
    */
   constructor() {
+    if(!fs.existsSync('./src/usuarios')){
+      fs.mkdirSync('./src/usuarios');
+    }
     if (!fs.existsSync(directorioUsuario)) {
       fs.mkdirSync(directorioUsuario);
     }
