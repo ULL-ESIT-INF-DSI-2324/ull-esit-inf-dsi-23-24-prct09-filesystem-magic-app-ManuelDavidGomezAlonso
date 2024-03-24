@@ -142,6 +142,7 @@ function comprube(argv: magicCard) {
  * Todos los parametros se añadiran por comandos mediante --.
  * __Ejemplo de uso:__ node dist/app.js add --id 1 --name "Carta1" --manaCost 1 --color white --type creature --rare common --rules "Reglas" --loyalty 1 --value 1 --strRes 1.
  */
+// eslint-disable-next-line
 const argv = yargs(hideBin(process.argv))
   .command(
     "add",
@@ -249,7 +250,7 @@ const argv = yargs(hideBin(process.argv))
       },
       newValue: {
         description: "New value",
-        type: "string" || "number",
+        type: "string" as "string" | "number",
         demandOption: true,
       },
     },
