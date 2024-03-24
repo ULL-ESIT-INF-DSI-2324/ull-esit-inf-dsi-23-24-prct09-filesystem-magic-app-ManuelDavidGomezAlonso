@@ -142,7 +142,7 @@ function comprube(argv: magicCard) {
  * Todos los parametros se añadiran por comandos mediante --.
  * __Ejemplo de uso:__ node dist/app.js add --id 1 --name "Carta1" --manaCost 1 --color white --type creature --rare common --rules "Reglas" --loyalty 1 --value 1 --strRes 1.
  */
-yargs(hideBin(process.argv))
+const argv = yargs(hideBin(process.argv))
   .command(
     "add",
     "Adds a card to the collection",
