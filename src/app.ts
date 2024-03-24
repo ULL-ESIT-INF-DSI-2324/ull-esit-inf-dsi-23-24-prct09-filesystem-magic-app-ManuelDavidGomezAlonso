@@ -2,11 +2,11 @@
 /**
  * @fileoverview Este archivo contiene la declaración de los comandos, y el uso de las funciones para gestionar las cartas mediante ficheros JSON.
  */
-import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { magicCard, color, tipe, rare } from "./magiCard.js";
 import { jsonCards } from "./jsonController.js";
 import chalk from "chalk";
+import yargs from "yargs";
 
 yargs(hideBin(process.argv))
   /**
@@ -80,33 +80,6 @@ yargs(hideBin(process.argv))
       },
     },
     (argv) => {
-      if (isNaN(argv.id)) {
-        throw chalk.red(new Error("ID must be a number"));
-      }
-
-      if (typeof argv.name !== "string") {
-        throw chalk.red(new Error("Name must be a string"));
-      }
-
-      if (isNaN(argv.manaCost)) {
-        throw chalk.red(new Error("Mana Cost must be a number"));
-      }
-
-      if (!Object.values(color).includes(argv.color)) {
-        throw chalk.red(new Error("Color must be a valid color"));
-      }
-
-      if (!Object.values(tipe).includes(argv.type)) {
-        throw chalk.red(new Error("Type must be a valid type"));
-      }
-
-      if (!Object.values(rare).includes(argv.rare)) {
-        throw chalk.red(new Error("Rare must be a valid rare"));
-      }
-
-      if (typeof argv.rules !== "string") {
-        throw chalk.red(new Error("Rules must be a string"));
-      }
 
       if (argv.type === Object.values(tipe)[5]) {
         if (!argv.loyalty) {
@@ -116,15 +89,6 @@ yargs(hideBin(process.argv))
         if (argv.loyalty !== undefined) {
           throw chalk.red(new Error("Loyalty is only for planeswalker type"));
         }
-      }
-
-
-      if (isNaN(argv.value)) {
-        throw chalk.red(new Error("Value must be a number"));
-      }
-
-      if (argv.strRes && isNaN(argv.strRes)) {
-        throw chalk.red(new Error("Strength/Resistance must be a number"));
       }
 
       if (argv.type === Object.values(tipe)[0]) {
@@ -322,33 +286,6 @@ yargs(hideBin(process.argv))
       },
     },
     (argv) => {
-      if (isNaN(argv.id)) {
-        throw chalk.red(new Error("ID must be a number"));
-      }
-
-      if (typeof argv.name !== "string") {
-        throw chalk.red(new Error("Name must be a string"));
-      }
-
-      if (isNaN(argv.manaCost)) {
-        throw chalk.red(new Error("Mana Cost must be a number"));
-      }
-
-      if (!Object.values(color).includes(argv.color)) {
-        throw chalk.red(new Error("Color must be a valid color"));
-      }
-
-      if (!Object.values(tipe).includes(argv.type)) {
-        throw chalk.red(new Error("Type must be a valid type"));
-      }
-
-      if (!Object.values(rare).includes(argv.rare)) {
-        throw chalk.red(new Error("Rare must be a valid rare"));
-      }
-
-      if (typeof argv.rules !== "string") {
-        throw chalk.red(new Error("Rules must be a string"));
-      }
 
       if (argv.type === Object.values(tipe)[5]) {
         if (!argv.loyalty) {
@@ -358,14 +295,6 @@ yargs(hideBin(process.argv))
         if (argv.loyalty !== undefined) {
           throw chalk.red(new Error("Loyalty is only for planeswalker type"));
         }
-      }
-
-      if (isNaN(argv.value)) {
-        throw chalk.red(new Error("Value must be a number"));
-      }
-
-      if (argv.strRes && isNaN(argv.strRes)) {
-        throw chalk.red(new Error("Strength/Resistance must be a number"));
       }
 
       if (argv.type === Object.values(tipe)[0]) {
