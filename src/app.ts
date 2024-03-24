@@ -1,4 +1,4 @@
-// NOSONAR
+
 /**
  * @fileoverview Este archivo contiene la declaración de los comandos, y el uso de las funciones para gestionar las cartas mediante ficheros JSON.
  */

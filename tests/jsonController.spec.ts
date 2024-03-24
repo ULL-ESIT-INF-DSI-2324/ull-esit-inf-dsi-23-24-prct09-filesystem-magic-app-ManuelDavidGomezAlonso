@@ -1,4 +1,4 @@
-//NOSONAR
+
 import 'mocha';
 import { expect } from 'chai';
 import { jsonCards } from '../src/jsonController.js';
